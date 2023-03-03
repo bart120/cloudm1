@@ -1,0 +1,32 @@
+version: '3.9'
+
+networks:
+  backend:
+    name: backend-net
+
+services:
+  database:
+    container_name: mysql-cont
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=bob
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=toto
+      - MYSQL_PASSWORD=bob
+    volumes:
+      - D:\formation\docker\ynov\volumes\data:/var/lib/mysql
+    networks:
+      - backend
+
+  phpmyadmin:
+    container_name: admin-cont
+    image: phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      - MYSQL_ROOT_PASSWORD=bob
+      - PMA_HOST=database
+    networks:
+      - backend
+    depends_on:
+      - database

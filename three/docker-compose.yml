@@ -1,0 +1,50 @@
+version: '3.9'
+
+networks:
+  backend:
+    name: backend-net
+  frontend:
+    name: frontend-net
+
+services:
+  database:
+    container_name: mysql-cont
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=bob
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER_NAME}
+      - MYSQL_PASSWORD=${DB_USER_PWD}
+    volumes:
+      - D:\formation\docker\ynov\volumes\data:/var/lib/mysql
+    networks:
+      - backend
+      - frontend
+
+  phpmyadmin:
+    container_name: admin-cont
+    image: phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      - MYSQL_ROOT_PASSWORD=bob
+      - PMA_HOST=database
+    networks:
+      - backend
+    depends_on:
+      - database
+
+  wordpress:
+    container_name: wp-cont
+    image: wordpress:latest
+    ports:
+      - 80:80
+    networks:
+      - frontend
+    depends_on:
+      - database
+    environment:
+      - WORDPRESS_DB_HOST=database
+      - WORDPRESS_DB_USER=${DB_USER_NAME}
+      - WORDPRESS_DB_PASSWORD=${DB_USER_PWD}
+      - WORDPRESS_DB_NAME=${DB_NAME}

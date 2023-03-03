@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "command": "dotnet",
+    "args": [],
+    "tasks": [
+        {
+            "label": "publish",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceRoot}/dotnetgigs.sln",
+                "-c",
+                "Debug",
+                "-o",
+                "bin/pub"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
