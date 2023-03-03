@@ -35,7 +35,7 @@ Le conteneur expose le port sqlserver 1433
 ### Dockerfile pour les services Applicants, Identity et Jobs
 La contstruction se déroule en plusieurs étapes:
 - Depuis l'image mcr.microsoft.com/dotnet/core/aspnet:2.1-stretch-slim qui vous nomerez "base", créer un répertoire /app et exposer les ports 80 et 443
-- Depuis l'image mcr.microsoft.com/dotnet/core/sdk:2.1-stretch qui vous nomerez "build", créer un répertoire /src. Copier les dossiers Services/Applicants.Api et Foundation/Events dans le répertoire /src.
+- Depuis l'image mcr.microsoft.com/dotnet/core/sdk:2.1-stretch qui vous nomerez "build", créer un répertoire /src. Copier les dossiers Services/(dossier qui contient le fichier csproj) et Foundation/Events dans le répertoire /src.
 - Exécuter la commande "dotnet restore {nom_du_projet.csproj}"
 - Faites une copie intégrale
 - Placez vous dans le dossier du projet (dossier qui contient le fichier csproj)
